@@ -31,7 +31,7 @@ routes.post('/signUp', [
 
         const userExist = await User.findOne({ email });
         const token = jwt.sign({id: userExist._id}, process.env.SECRET_KEY, { expiresIn: '1d' });
-        res.status(201).json({ success: true, Authtoken: token, name });
+        return res.status(201).json({ success: true, Authtoken: token, name });
 
     } catch (error)
     {
@@ -64,7 +64,7 @@ routes.post('/login', [
             return res.status(400).json({ success: false, msg: "Incorrect Password!!" });     
         }
         const token = jwt.sign({id: userExist._id}, process.env.SECRET_KEY, { expiresIn: '1d' });
-        res.status(201).json({ success: true, Authtoken: token, name: userExist.name });
+        return res.status(201).json({ success: true, Authtoken: token, name: userExist.name });
 
     } catch (error) {
         
