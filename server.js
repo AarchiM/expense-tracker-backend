@@ -7,12 +7,14 @@ import cors from "cors";
 
 dotenv.config();
 const app = express();
-
 const corsOptions = {
   origin: process.env.ORIGIN,
   methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS", "HEAD"],
   credentials: true,
 };
+app.get('/favicon.ico', (req, res) => {
+  res.status(204).end();
+});
 
 app.use(cors(corsOptions));
 app.use(express.json());
