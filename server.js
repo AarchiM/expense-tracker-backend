@@ -4,6 +4,13 @@ import { connectDB } from './config/db.js';
 import incomeExpense from './router/IncomeExpenseRoutes.js'
 import userRoute from './router/UsersRoute.js';
 import cors from "cors";
+import path from 'node:path';
+import favicon from 'serve-favicon';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config();
 const app = express();
@@ -12,9 +19,8 @@ const corsOptions = {
   methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS", "HEAD"],
   credentials: true,
 };
-app.get('/favicon.ico', (req, res) => {
-  res.status(204).end();
-});
+
+app.use(favicon(path.join(__dirname, 'public', 'vite.svg')));
 
 app.use(cors(corsOptions));
 app.use(express.json());
